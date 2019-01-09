@@ -1,18 +1,24 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h2>Game</h2>
+<div>
+    {% with messages = get_flashed_messages() %} 
+    {% for message in messages %}
+    <div class="alert alert-warning" role="alert">{{ message }}</div>
+    {% endfor %} {% endwith %}
+</div>
 <div>
     <p>Username: {{ username }} </p>
     <p>Score: {{ score }} </p>
+    <p>Attempts: {{ attempts }}</p>
 </div>
 <div>
     <p>Question {{ question_number }}</p>
     <p>{{ current_question }}</p>
 </div>
 
-<form method = 'POST'>
-    <input type="text" name="answer"/>
-    <input type="submit" value="Submit"/>
+<form method='POST'>
+    <input type="text" name="answer" />
+    <input type="submit" value="Submit" />
 </form>
 
 {% endblock %}
