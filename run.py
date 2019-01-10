@@ -38,7 +38,6 @@ def game():
     if request.method == "POST" and session['question_number'] < len(questions):
         prev_qa_tuple = questions[session['question_number']]
         if request.form['answer'] == prev_qa_tuple['answer']:
-            flash('CORRECT')
             session['question_number'] +=1
             session['score'] +=1
             '''
@@ -46,39 +45,30 @@ def game():
             '''
             if session['question_number'] < len(questions):
                 current_qa_tuple = questions[session['question_number']]
-                return render_template('game.html', username = session['username'], 
-                                        score = session['score'], current_question = current_qa_tuple["question"], 
-                                        question_number = session ['question_number'] + 1, attempts = session['attempts_left'])
+                flash('Correct Answer')
+                
         elif session['attempts_left'] > 1 :
             session['attempts_left']-= 1
             flash('WRONG')
-            return render_template('game.html', username = session['username'], 
-                                        score = session['score'], current_question = prev_qa_tuple["question"], 
-                                        question_number = session ['question_number'] + 1, attempts = session['attempts_left'])
+          
         elif session['attempts_left'] <= 1:
             session['attempts_left'] = max_attempts
             session['question_number'] +=1
             next_qa_tuple = questions[session['question_number']]
             flash('Try a different question')
-            return render_template('game.html', username = session['username'], 
-                                        score = session['score'], current_question = next_qa_tuple["question"], 
-                                        question_number = session ['question_number'] + 1, attempts = session['attempts_left'])
-        
+           
         
     if session['question_number'] >= len(questions):
         return redirect ('/')
         
-    
     '''
     New Game 
     '''
-    first_qa_tuple = questions[session['question_number']]
+    current_qa_tuple = questions[session['question_number']]
     return render_template('game.html', username = session['username'], 
-                            score = session['score'], current_question = first_qa_tuple["question"], 
+                            score = session['score'], current_question = current_qa_tuple["question"], 
                             question_number = session ['question_number'] + 1, attempts = session['attempts_left'])
 
-
-    
 @app.route('/leaderboard')
 def leaderboard():
     return render_template('leaderboard.html')

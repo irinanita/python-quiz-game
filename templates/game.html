@@ -3,8 +3,9 @@
 <div>
     {% with messages = get_flashed_messages() %} 
     {% for message in messages %}
-    <div class="alert alert-warning" role="alert">{{ message }}</div>
-    {% endfor %} {% endwith %}
+    <div>{{ message }}</div>
+    {% endfor %} 
+    {% endwith %}
 </div>
 <div>
     <p>Username: {{ username }} </p>
