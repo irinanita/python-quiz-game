@@ -1,7 +1,13 @@
-{% extends 'base.html' %} {%block content%}
+{% extends 'base.html' %} 
+{%block content%}
 <h2>Welcome</h2>
 <p>Would you like to play a quiz game?</p>
 <p>If the answer is yes insert your username in the field bellow and hit the START button</p>
+{% with messages = get_flashed_messages() %} 
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %} 
+    {% endwith %}
 <form method="POST" action="/start_game">
     <input type="text" name="username" placeholder="username" />
     <br/>

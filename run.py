@@ -24,19 +24,27 @@ def start_game():
     session['question_number']= 0
     session['attempts_left'] = max_attempts
     return redirect ('/game') 
+
+@app.route('/game_over')
+def game_over():
+    return render_template('game_over.html')
     
 @app.route('/game', methods = ['GET','POST'])
 def game():
     '''
-    User must have inserted the username in order to play
+    User must have inserted a username in order to play
     '''
-    if 'username' not in session:
+    if 'username' not in session or session['username'] == "" :
+        flash('Please insert a username')
         return redirect ('/')
     '''
+
     check if the previously asked question was the last and if the given answer was correct
     '''
     if request.method == "POST" and session['question_number'] < len(questions):
         prev_qa_tuple = questions[session['question_number']]
+        if request.form['answer'] == "":
+            return redirect('/game')
         if request.form['answer'] == prev_qa_tuple['answer']:
             session['question_number'] +=1
             session['score'] +=1
@@ -44,22 +52,19 @@ def game():
             check if there are more questions to ask and show the next question
             '''
             if session['question_number'] < len(questions):
-                current_qa_tuple = questions[session['question_number']]
+                session['attempts_left'] = max_attempts
                 flash('Correct Answer')
                 
         elif session['attempts_left'] > 1 :
             session['attempts_left']-= 1
-            flash('WRONG')
+            flash('Try again' )
           
         elif session['attempts_left'] <= 1:
             session['attempts_left'] = max_attempts
             session['question_number'] +=1
-            next_qa_tuple = questions[session['question_number']]
-            flash('Try a different question')
-           
         
     if session['question_number'] >= len(questions):
-        return redirect ('/')
+        return render_template('game_over.html', username = session['username'], score = session['score'])
         
     '''
     New Game 
