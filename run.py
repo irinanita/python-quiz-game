@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, url_for, session, request, json, redirect,flash
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET", "not a secret")
+app.secret_key = os.getenv("SECRET", "not a secretgit pu")
 
 max_attempts = 3
 with open("data/questions.json") as questions_file:
@@ -38,30 +38,23 @@ def game():
         flash('Please insert a username')
         return redirect ('/')
     '''
-
+    
     check if the previously asked question was the last and if the given answer was correct
     '''
+    
     if request.method == "POST" and session['question_number'] < len(questions):
+        option_checked =  request.form['option']
+        print(option_checked)
         prev_qa_tuple = questions[session['question_number']]
-        if request.form['answer'] == "":
-            return redirect('/game')
-        if request.form['answer'] == prev_qa_tuple['answer']:
-            session['question_number'] +=1
-            session['score'] +=1
-            '''
-            check if there are more questions to ask and show the next question
-            '''
-            if session['question_number'] < len(questions):
-                session['attempts_left'] = max_attempts
-                flash('Correct Answer')
-                
-        elif session['attempts_left'] > 1 :
-            session['attempts_left']-= 1
-            flash('Try again' )
-          
-        elif session['attempts_left'] <= 1:
-            session['attempts_left'] = max_attempts
-            session['question_number'] +=1
+        print(prev_qa_tuple['answer'])
+        # if option_checked == prev_qa_tuple['answer']:
+        #     session['score'] +=1
+        #     session['question_number'] +=1
+        #     if session['question_number'] < len(questions):
+        #         flash('Correct Answer')
+        # else:
+        #     flash('Wrong Answer')
+        #     session['question_number'] +=1
         
     if session['question_number'] >= len(questions):
         return render_template('game_over.html', username = session['username'], score = session['score'])
@@ -70,7 +63,9 @@ def game():
     New Game 
     '''
     current_qa_tuple = questions[session['question_number']]
-    return render_template('game.html', username = session['username'], 
+    options = current_qa_tuple['options']
+    return render_template('game.html', username = session['username'],
+                            questions = questions, options = options,
                             score = session['score'], current_question = current_qa_tuple["question"], 
                             question_number = session ['question_number'] + 1, attempts = session['attempts_left'])
 

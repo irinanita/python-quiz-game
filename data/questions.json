@@ -1,5 +1,8 @@
 [
-    {"question": "who are you?", "answer":"user" },
+    {"question": "who are you?", "answer":"user",
+                 "options": ["me", "user", "who?", "yuki"]
+        
+    },
     {"question": "dog? " , "answer":"yuki"},
     {"question": "where?" , "answer":"here"},
     {"question": "cinema?" , "answer":"netflix"}
