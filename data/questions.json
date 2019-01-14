@@ -3,8 +3,14 @@
                  "options": ["me", "user", "who?", "yuki"]
         
     },
-    {"question": "dog? " , "answer":"yuki"},
-    {"question": "where?" , "answer":"here"},
-    {"question": "cinema?" , "answer":"netflix"}
+    {"question": "dog? " , "answer":"yuki",
+                "options": ["scooby", "whoof", "bau-bau", "yuki"] 
+    },
+    {"question": "where?" , "answer":"here",
+                "options": ["Narnia", "here", "far away", "Europe"] 
+    },
+    {"question": "cinema?" , "answer":"netflix",
+                "options": ["yes", "Theatre", "netflix", "Odeon"] 
+    }
 
     ]

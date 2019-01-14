@@ -47,14 +47,13 @@ def game():
         print(option_checked)
         prev_qa_tuple = questions[session['question_number']]
         print(prev_qa_tuple['answer'])
-        # if option_checked == prev_qa_tuple['answer']:
-        #     session['score'] +=1
-        #     session['question_number'] +=1
-        #     if session['question_number'] < len(questions):
-        #         flash('Correct Answer')
-        # else:
-        #     flash('Wrong Answer')
-        #     session['question_number'] +=1
+        if option_checked == prev_qa_tuple['answer']:
+            flash('check correct')
+            session['score'] +=1
+            session['question_number'] +=1
+        else:
+            flash('Wrong Answer')
+            session['question_number'] +=1
         
     if session['question_number'] >= len(questions):
         return render_template('game_over.html', username = session['username'], score = session['score'])
