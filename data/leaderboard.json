@@ -1,10 +1,18 @@
 [
     {
+        "score": 4,
+        "username": "1"
+    },
+    {
+        "score": 3,
+        "username": "me"
+    },
+    {
         "score": 2,
         "username": "wow"
     },
     {
-        "score": 4,
-        "username": "1"
+        "score": 2,
+        "username": "yuki"
     }
 ]
