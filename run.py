@@ -56,6 +56,7 @@ def game():
             session['question_number'] +=1
         
     if session['question_number'] >= len(questions):
+        leaderboard()
         return render_template('game_over.html', username = session['username'], score = session['score'])
         
     '''
@@ -68,9 +69,24 @@ def game():
                             score = session['score'], current_question = current_qa_tuple["question"], 
                             question_number = session ['question_number'] + 1, attempts = session['attempts_left'])
 
-@app.route('/leaderboard')
 def leaderboard():
-    return render_template('leaderboard.html')
+    #new_jason=[]
+    new_data={}
+    new_data["username"]=session['username']
+    new_data["score"]=session['score']
+    #new_jason.append(new_data)
+    
+    with open("data/leaderboard.json") as leaderboard:
+        current_data = json.load(leaderboard)
+    
+    current_data.append(new_data)
+    
+    with open("data/leaderboard.json","w") as leaderboard:
+        json.dump(current_data,leaderboard, sort_keys = True, indent = 4,
+               ensure_ascii = False)
+        leaderboard.write("\n") 
+        
+    return redirect('/game')
 
 if __name__ == '__main__':
     app.run(host = os.getenv('IP'), 
