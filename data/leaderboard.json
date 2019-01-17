@@ -1,18 +1,27 @@
 [
     {
+        "elapsed_time": 8.606157064437866,
         "score": 4,
-        "username": "1"
+        "username": "yuki"
     },
     {
-        "score": 3,
-        "username": "me"
-    },
-    {
-        "score": 2,
+        "elapsed_time": 9.311019897460938,
+        "score": 4,
         "username": "wow"
     },
     {
-        "score": 2,
-        "username": "yuki"
+        "elapsed_time": 15.17991304397583,
+        "score": 4,
+        "username": "me"
+    },
+    {
+        "elapsed_time": 4.5630271434783936,
+        "score": 1,
+        "username": "me"
+    },
+    {
+        "elapsed_time": 3.4679949283599854,
+        "score": 0,
+        "username": "fast one"
     }
 ]

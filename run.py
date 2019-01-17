@@ -1,20 +1,17 @@
 import os
-import operator
+import time
 from flask import Flask, render_template, url_for, session, request, json, redirect,flash
 from operator import itemgetter
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET", "not a secretgit pu")
 
+
 max_attempts = 3
 with open("data/questions.json") as questions_file:
     questions = json.load(questions_file)
-
-high_score = {
-    "name": "noname",
-    "score": 0
-}
-
+    
+    
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -25,6 +22,7 @@ def start_game():
     session['score'] = 0
     session['question_number']= 0
     session['attempts_left'] = max_attempts
+    session['start_time'] = time.time()
     return redirect ('/game') 
 
 @app.route('/game_over')
@@ -46,9 +44,7 @@ def game():
     
     if request.method == "POST" and session['question_number'] < len(questions):
         option_checked =  request.form['option']
-        print(option_checked)
         prev_qa_tuple = questions[session['question_number']]
-        print(prev_qa_tuple['answer'])
         if option_checked == prev_qa_tuple['answer']:
             flash('check correct')
             session['score'] +=1
@@ -58,6 +54,7 @@ def game():
             session['question_number'] +=1
         
     if session['question_number'] >= len(questions):
+        session['elapsed_time'] = time.time() - session['start_time']
         leaderboard()
         return render_template('game_over.html', username = session['username'], score = session['score'])
         
@@ -75,14 +72,19 @@ def leaderboard():
     new_data={}
     new_data["username"]=session['username']
     new_data["score"]=session['score']
+    new_data["elapsed_time"]=session["elapsed_time"]
     
     with open("data/leaderboard.json") as leaderboard:
         current_data = json.load(leaderboard)
     
     current_data.append(new_data)
     
-    new_leaderboard = sorted(current_data,key=itemgetter('score'),reverse=True)
+    new_leaderboard = sorted(current_data,key=itemgetter('elapsed_time'))
+    new_leaderboard = sorted(new_leaderboard,key=itemgetter('score'),reverse=True)
+   
     
+    del new_leaderboard[10:]
+
     with open("data/leaderboard.json","w") as leaderboard:
         json.dump(new_leaderboard,leaderboard, sort_keys = True, indent = 4,
                ensure_ascii = False)
