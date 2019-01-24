@@ -1,14 +1,18 @@
 h1{
-    font-family: 'Starjhol', sans-serif;
+    font-family: 'Starjedi', sans-serif;
+    color:$white;
 }
 
 h2{
-  font-family: 'Starjedi', sans-serif;
-  font-size: 38px;
+  font-family: 'Starjhol', sans-serif;
+  font-size: 40px;
+  color:$white;
 }
 
 p{
     font-size: 20px;
+    font-family: 'Roboto Mono', monospace;
+    color:$grey;
 }
 
 body{
@@ -20,30 +24,28 @@ body{
 }
 
 header {
-    width: 100%;
+    width: 100vw;
+    text-align:center;
     background-color:$black;
-    padding:15px 30px;
-    color:$orange; 
     border-bottom: 1px solid $orange;
+    padding: 15px 0px;
 }
 
 main{
     flex:1;
-    padding:15px;
-    margin: 0 auto;
     width: 100vw;
+    background-color:$black;
     background-image: url('../img/stars2.jpg');
     opacity: 0.9;
     z-index:1;
 }
 
 footer {
-    width: 100%;
+    width: 100vw;
     background-color:$black; 
-    color:$wheat;
     border-top: 1px solid $orange;
     padding:15px 30px;
-    font-family: 'Roboto Mono', monospace;
+    box-sizing: border-box;
 
 }
 
@@ -53,8 +55,9 @@ footer {
     text-align: center;
     border:1px solid black;
     border-radius: 30px;
-    background-color: white;
+    background-color: $charcoal;
     max-width: 1000px;
     margin: 30px auto;
     z-index: 2;
 }
+

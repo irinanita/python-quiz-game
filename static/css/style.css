@@ -13,14 +13,18 @@
   /* Legacy iOS */ }
 /*COLOURS*/
 h1 {
-  font-family: 'Starjhol', sans-serif; }
+  font-family: 'Starjedi', sans-serif;
+  color: #fff; }
 
 h2 {
-  font-family: 'Starjedi', sans-serif;
-  font-size: 38px; }
+  font-family: 'Starjhol', sans-serif;
+  font-size: 40px;
+  color: #fff; }
 
 p {
-  font-size: 20px; }
+  font-size: 20px;
+  font-family: 'Roboto Mono', monospace;
+  color: #ddd; }
 
 body {
   min-height: 100vh;
@@ -30,37 +34,52 @@ body {
   flex-direction: column; }
 
 header {
-  width: 100%;
-  background-color: #0a0000;
-  padding: 15px 30px;
-  color: #ffa72b;
-  border-bottom: 1px solid #ffa72b; }
+  width: 100vw;
+  text-align: center;
+  background-color: #222;
+  border-bottom: 1px solid #ffa72b;
+  padding: 15px 0px; }
 
 main {
   flex: 1;
-  padding: 15px;
-  margin: 0 auto;
   width: 100vw;
+  background-color: #222;
   background-image: url("../img/stars2.jpg");
   opacity: 0.9;
   z-index: 1; }
 
 footer {
-  width: 100%;
-  background-color: #0a0000;
-  color: #ffe5c0;
+  width: 100vw;
+  background-color: #222;
   border-top: 1px solid #ffa72b;
   padding: 15px 30px;
-  font-family: 'Roboto Mono', monospace; }
+  box-sizing: border-box; }
 
 .game--wrapper {
   padding: 15px;
   text-align: center;
   border: 1px solid black;
   border-radius: 30px;
-  background-color: white;
+  background-color: #282727;
   max-width: 1000px;
   margin: 30px auto;
   z-index: 2; }
+
+input[type=radio]:checked {
+  border: 1px solid #ffa72b; }
+
+.form--input {
+  box-sizing: border-box;
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 15px; }
+.form--button {
+  box-sizing: border-box;
+  margin-top: 15px;
+  width: 60px;
+  padding: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,21 @@
+input[type=radio]:checked {
+    border: 1px solid $orange;
+}
+
+.form {
+    &--input {
+        box-sizing: border-box;
+        margin-top:15px;
+        padding: 12px 20px;
+        border: 1px solid $grey;
+        border-radius: 15px;
+    }
+    &--button{
+        box-sizing: border-box;
+        margin-top:15px;
+        width:60px;
+        padding: 10px 0;
+        border: 1px solid $grey;
+        border-radius: 10px;
+    }
+}
